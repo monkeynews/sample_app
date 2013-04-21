@@ -17,3 +17,6 @@
 # Ignore other unneeded files.
 *~
 
+# Ignore file with database userid/passwd
+/config/database.yml
+
