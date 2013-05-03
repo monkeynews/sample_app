@@ -4,6 +4,7 @@ gem 'rails', '3.2.13'
 gem 'pg', '0.12.2'
 
 group :development, :test do
+  gem 'minitest'
   gem 'rspec-rails', '2.11.0'
 end
 
