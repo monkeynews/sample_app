@@ -4,8 +4,10 @@ gem 'rails', '3.2.13'
 gem 'pg', '0.12.2'
 
 group :development, :test do
-  gem 'minitest'
+  gem 'minitest', '4.7.4'
   gem 'rspec-rails', '2.11.0'
+  gem 'guard-rspec', '1.2.1'
+  gem 'spork', '0.9.2'
 end
 
 # Gems used only for assets and not required
@@ -20,6 +22,7 @@ gem 'jquery-rails', '2.0.2'
 
 group :test do
   gem 'capybara', '1.1.2'
+  gem 'rb-fchange', '0.0.5'
+  gem 'rb-notifu', '0.0.4'
+  gem 'win32console', '1.3.0'
 end
-
-
