@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy]
-  before_filter :correct_user,   only: [:edit, :update]
-  before_filter :admin_user,     only: :destroy
+  before_filter :signed_in_user,     only: [:index, :edit, :update, :destroy]
+  before_filter :not_signed_in_user, only: [:new, :create]
+  before_filter :correct_user,       only: [:edit, :update]
+  before_filter :admin_user,         only: :destroy
+  before_filter :other_user,         only: :destroy
   
   def index
     @users = User.paginate(page: params[:page])
@@ -55,11 +57,23 @@ class UsersController < ApplicationController
       end
     end
 
+    def not_signed_in_user
+      if signed_in?
+        redirect_to root_path, notice: "Already signed in."
+      end
+    end
+
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_path) unless current_user?(@user)
     end
 
+    def other_user
+      if current_user?(User.find(params[:id]))
+        redirect_to root_path, notice: "Can't do that to your own account."
+      end
+    end
+    
     def admin_user
       redirect_to(root_path) unless current_user.admin?
     end
